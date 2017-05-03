@@ -27,7 +27,7 @@ ZHStringConstantWithValue(kZHDoneButton, Done);
         _editing = editing;
         
         [self.tableView setEditing:!self.tableView.editing animated:YES];
-        [self.editButton setTitle:editing ? kZHDoneButton : kZHEditingButton forState:UIControlStateNormal];
+//        [self.editButton setTitle:editing ? kZHDoneButton : kZHEditingButton forState:UIControlStateNormal];
     }
 }
 
@@ -40,7 +40,6 @@ ZHStringConstantWithValue(kZHDoneButton, Done);
         [_model addObserver:self];
     }
 }
-
 
 - (void)updateUsersViewWithModelChange:(ZHArrayChange *)modelChange {
     [self.tableView updateTableViewWithModelChange:modelChange];

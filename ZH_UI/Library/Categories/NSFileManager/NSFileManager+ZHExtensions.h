@@ -10,12 +10,11 @@
 
 @interface NSFileManager (ZHExtensions)
 
-+ (NSString *)applicationDataPathWithFolderName:(NSString *)folderName;
++ (NSURL *)documentDirectoryPath;
++ (NSURL *)libraryDirectoryPath;
++ (NSURL *)applicationDirectoryPath;
++ (NSURL *)cacheDirectoryPath;
 
-+ (NSString *)documentDirectoryPath;
-+ (NSString *)libraryDirectoryPath;
-
-+ (NSString *)pathWithDirectory:(NSSearchPathDirectory)directory;
 + (NSArray *)pathsWithDirectory:(NSSearchPathDirectory)directory;
 
 @end

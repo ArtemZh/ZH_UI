@@ -40,7 +40,7 @@
 
 - (void)updateTableViewWithBlock:(ZHTableViewUpdateBlock)block {
     [self beginUpdates];
-    ZHDispatchBlock(block);
+    ZHPerformBlock(block);
     [self endUpdates];
 }
 

@@ -30,6 +30,11 @@
 		ACD903F01EACFD140048678C /* ZHDeleteChange+ZHExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = ACD903EF1EACFD140048678C /* ZHDeleteChange+ZHExtensions.m */; };
 		ACD903F31EACFE6D0048678C /* ZHInsertChange+ZHExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = ACD903F21EACFE6D0048678C /* ZHInsertChange+ZHExtensions.m */; };
 		ACD903F61EACFF050048678C /* ZHMoveChange+ZHExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = ACD903F51EACFF050048678C /* ZHMoveChange+ZHExtensions.m */; };
+		ACDB7C7A1EB8CD18003D6953 /* NSObject+ZHExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDB7C791EB8CD18003D6953 /* NSObject+ZHExtensions.m */; };
+		ACDB7C7E1EB8E895003D6953 /* ZHObjectCache.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDB7C7D1EB8E895003D6953 /* ZHObjectCache.m */; };
+		ACDB7C821EB8EA5B003D6953 /* ZHImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDB7C811EB8EA5B003D6953 /* ZHImageModel.m */; };
+		ACDB7C861EB8EBDF003D6953 /* ZHFileSystemImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDB7C851EB8EBDF003D6953 /* ZHFileSystemImageModel.m */; };
+		ACDB7C8A1EB8ECBE003D6953 /* ZHURLImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDB7C891EB8ECBE003D6953 /* ZHURLImageModel.m */; };
 		ACDCD62B1E98D48A00BD27DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDCD62A1E98D48A00BD27DC /* main.m */; };
 		ACDCD62E1E98D48A00BD27DC /* ZHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDCD62D1E98D48A00BD27DC /* ZHAppDelegate.m */; };
 		ACDCD6361E98D48A00BD27DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACDCD6351E98D48A00BD27DC /* Assets.xcassets */; };
@@ -43,7 +48,6 @@
 		ACEAEDCC1EA654700020925F /* ZHArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEAEDCB1EA654700020925F /* ZHArrayModel.m */; };
 		ACEAEDD31EA65FFD0020925F /* ZHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEAEDD01EA65FFD0020925F /* ZHUser.m */; };
 		ACEAEDD41EA65FFD0020925F /* ZHUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEAEDD21EA65FFD0020925F /* ZHUsers.m */; };
-		ACEAEDD71EA660980020925F /* ZHFilteredModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEAEDD61EA660980020925F /* ZHFilteredModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +97,16 @@
 		ACD903F21EACFE6D0048678C /* ZHInsertChange+ZHExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZHInsertChange+ZHExtensions.m"; sourceTree = "<group>"; };
 		ACD903F41EACFF050048678C /* ZHMoveChange+ZHExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZHMoveChange+ZHExtensions.h"; sourceTree = "<group>"; };
 		ACD903F51EACFF050048678C /* ZHMoveChange+ZHExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZHMoveChange+ZHExtensions.m"; sourceTree = "<group>"; };
+		ACDB7C781EB8CD18003D6953 /* NSObject+ZHExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ZHExtensions.h"; sourceTree = "<group>"; };
+		ACDB7C791EB8CD18003D6953 /* NSObject+ZHExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ZHExtensions.m"; sourceTree = "<group>"; };
+		ACDB7C7C1EB8E895003D6953 /* ZHObjectCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHObjectCache.h; sourceTree = "<group>"; };
+		ACDB7C7D1EB8E895003D6953 /* ZHObjectCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHObjectCache.m; sourceTree = "<group>"; };
+		ACDB7C801EB8EA5B003D6953 /* ZHImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHImageModel.h; sourceTree = "<group>"; };
+		ACDB7C811EB8EA5B003D6953 /* ZHImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHImageModel.m; sourceTree = "<group>"; };
+		ACDB7C841EB8EBDF003D6953 /* ZHFileSystemImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHFileSystemImageModel.h; sourceTree = "<group>"; };
+		ACDB7C851EB8EBDF003D6953 /* ZHFileSystemImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHFileSystemImageModel.m; sourceTree = "<group>"; };
+		ACDB7C881EB8ECBE003D6953 /* ZHURLImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHURLImageModel.h; sourceTree = "<group>"; };
+		ACDB7C891EB8ECBE003D6953 /* ZHURLImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHURLImageModel.m; sourceTree = "<group>"; };
 		ACDCD6261E98D48A00BD27DC /* ZH_UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZH_UI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDCD62A1E98D48A00BD27DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ACDCD62C1E98D48A00BD27DC /* ZHAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHAppDelegate.h; sourceTree = "<group>"; };
@@ -116,8 +130,6 @@
 		ACEAEDD01EA65FFD0020925F /* ZHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHUser.m; sourceTree = "<group>"; };
 		ACEAEDD11EA65FFD0020925F /* ZHUsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHUsers.h; sourceTree = "<group>"; };
 		ACEAEDD21EA65FFD0020925F /* ZHUsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHUsers.m; sourceTree = "<group>"; };
-		ACEAEDD51EA660980020925F /* ZHFilteredModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHFilteredModel.h; sourceTree = "<group>"; };
-		ACEAEDD61EA660980020925F /* ZHFilteredModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHFilteredModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +143,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		363E3D121EB0D7F7008782E1 /* NSString + ZHExtensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "NSString + ZHExtensions";
+			sourceTree = "<group>";
+		};
 		36B7B5481EAE2C910087BF42 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,7 +192,6 @@
 				AC6957A51EA6431900B5D9D0 /* ZHMacros.h */,
 				AC6957911EA6431900B5D9D0 /* NSIndexPath+ZHExtensions.h */,
 				AC6957921EA6431900B5D9D0 /* NSIndexPath+ZHExtensions.m */,
-				AC6957B61EA6437100B5D9D0 /* ZHModel */,
 				ACEAEDC91EA654120020925F /* ZHArrayModel */,
 				AC6957A61EA6431900B5D9D0 /* ZHObservableObject */,
 			);
@@ -183,6 +201,8 @@
 		AC6957831EA6431900B5D9D0 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				ACDB7C771EB8CD02003D6953 /* NSObject+ZHExtensions */,
+				363E3D121EB0D7F7008782E1 /* NSString + ZHExtensions */,
 				ACD903E61EACFB5C0048678C /* ZHModelChange+ZHExtensions */,
 				ACEAEDC51EA651B20020925F /* NSFileManager */,
 				ACAE0A6D1EA66436005D867D /* ZHArrayChange+ZHArrayModel */,
@@ -228,6 +248,9 @@
 		AC69578D1EA6431900B5D9D0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				ACDB7C7F1EB8EA45003D6953 /* ZHImageModel */,
+				ACDB7C7B1EB8E87E003D6953 /* ZHObjectCache */,
+				AC6957B61EA6437100B5D9D0 /* ZHModel */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -299,8 +322,7 @@
 				AC6957B71EA643DA00B5D9D0 /* ZHModel.h */,
 				AC6957B81EA643DA00B5D9D0 /* ZHModel.m */,
 			);
-			name = ZHModel;
-			path = Classes/ZHModel;
+			path = ZHModel;
 			sourceTree = "<group>";
 		};
 		ACAE0A6D1EA66436005D867D /* ZHArrayChange+ZHArrayModel */ = {
@@ -342,6 +364,54 @@
 				ACD903F51EACFF050048678C /* ZHMoveChange+ZHExtensions.m */,
 			);
 			path = ChangesExtensions;
+			sourceTree = "<group>";
+		};
+		ACDB7C771EB8CD02003D6953 /* NSObject+ZHExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				ACDB7C781EB8CD18003D6953 /* NSObject+ZHExtensions.h */,
+				ACDB7C791EB8CD18003D6953 /* NSObject+ZHExtensions.m */,
+			);
+			path = "NSObject+ZHExtensions";
+			sourceTree = "<group>";
+		};
+		ACDB7C7B1EB8E87E003D6953 /* ZHObjectCache */ = {
+			isa = PBXGroup;
+			children = (
+				ACDB7C7C1EB8E895003D6953 /* ZHObjectCache.h */,
+				ACDB7C7D1EB8E895003D6953 /* ZHObjectCache.m */,
+			);
+			path = ZHObjectCache;
+			sourceTree = "<group>";
+		};
+		ACDB7C7F1EB8EA45003D6953 /* ZHImageModel */ = {
+			isa = PBXGroup;
+			children = (
+				ACDB7C871EB8ECA7003D6953 /* ZHURLImageModel */,
+				ACDB7C831EB8EBD2003D6953 /* ZHFileSystemImageModel */,
+				ACDB7C801EB8EA5B003D6953 /* ZHImageModel.h */,
+				ACDB7C811EB8EA5B003D6953 /* ZHImageModel.m */,
+			);
+			path = ZHImageModel;
+			sourceTree = "<group>";
+		};
+		ACDB7C831EB8EBD2003D6953 /* ZHFileSystemImageModel */ = {
+			isa = PBXGroup;
+			children = (
+				ACDB7C841EB8EBDF003D6953 /* ZHFileSystemImageModel.h */,
+				ACDB7C851EB8EBDF003D6953 /* ZHFileSystemImageModel.m */,
+			);
+			path = ZHFileSystemImageModel;
+			sourceTree = "<group>";
+		};
+		ACDB7C871EB8ECA7003D6953 /* ZHURLImageModel */ = {
+			isa = PBXGroup;
+			children = (
+				ACDB7C881EB8ECBE003D6953 /* ZHURLImageModel.h */,
+				ACDB7C891EB8ECBE003D6953 /* ZHURLImageModel.m */,
+			);
+			name = ZHURLImageModel;
+			path = ZHFileSystemImageModel/ZHURLImageModel;
 			sourceTree = "<group>";
 		};
 		ACDCD61D1E98D48A00BD27DC = {
@@ -423,7 +493,6 @@
 		ACEAEDCD1EA65FFD0020925F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ACEAEDCE1EA65FFD0020925F /* ZHFilteredModel */,
 				ACEAEDCF1EA65FFD0020925F /* ZHUser.h */,
 				ACEAEDD01EA65FFD0020925F /* ZHUser.m */,
 				ACEAEDD11EA65FFD0020925F /* ZHUsers.h */,
@@ -431,15 +500,6 @@
 			);
 			name = Model;
 			path = ../Library/Model;
-			sourceTree = "<group>";
-		};
-		ACEAEDCE1EA65FFD0020925F /* ZHFilteredModel */ = {
-			isa = PBXGroup;
-			children = (
-				ACEAEDD51EA660980020925F /* ZHFilteredModel.h */,
-				ACEAEDD61EA660980020925F /* ZHFilteredModel.m */,
-			);
-			path = ZHFilteredModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -517,11 +577,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC6957B41EA6431900B5D9D0 /* ZHTwoIndexArrayChange.m in Sources */,
+				ACDB7C861EB8EBDF003D6953 /* ZHFileSystemImageModel.m in Sources */,
 				ACEAEDC01EA64D480020925F /* NSArray+ZHExtensions.m in Sources */,
 				ACAE0A701EA66436005D867D /* ZHArrayChange+ZHArrayModel.m in Sources */,
 				ACEAEDCC1EA654700020925F /* ZHArrayModel.m in Sources */,
 				ACEAEDC41EA650AB0020925F /* NSMutableArray+ZHExtensions.m in Sources */,
 				AC6957B11EA6431900B5D9D0 /* ZHArrayChange.m in Sources */,
+				ACDB7C7A1EB8CD18003D6953 /* NSObject+ZHExtensions.m in Sources */,
 				AC6957B01EA6431900B5D9D0 /* ZHRemovingObject.m in Sources */,
 				AC6957AD1EA6431900B5D9D0 /* NSIndexPath+ZHExtensions.m in Sources */,
 				36C0B51D1EAF96CC008FCBD2 /* ZHViewController.m in Sources */,
@@ -530,10 +592,11 @@
 				ACD903DE1EACD09C0048678C /* UIWindow+ZHExtensions.m in Sources */,
 				AC6957AB1EA6431900B5D9D0 /* UITableView+ZHExtension.m in Sources */,
 				ACEAEDD31EA65FFD0020925F /* ZHUser.m in Sources */,
+				ACDB7C821EB8EA5B003D6953 /* ZHImageModel.m in Sources */,
+				ACDB7C8A1EB8ECBE003D6953 /* ZHURLImageModel.m in Sources */,
 				ACEAEDD41EA65FFD0020925F /* ZHUsers.m in Sources */,
 				ACDCD62E1E98D48A00BD27DC /* ZHAppDelegate.m in Sources */,
 				ACDCD62B1E98D48A00BD27DC /* main.m in Sources */,
-				ACEAEDD71EA660980020925F /* ZHFilteredModel.m in Sources */,
 				ACD903F61EACFF050048678C /* ZHMoveChange+ZHExtensions.m in Sources */,
 				ACD903F01EACFD140048678C /* ZHDeleteChange+ZHExtensions.m in Sources */,
 				AC6957AF1EA6431900B5D9D0 /* ZHMovingObject.m in Sources */,
@@ -543,6 +606,7 @@
 				AC6957AC1EA6431900B5D9D0 /* ZHGCD.m in Sources */,
 				AC6957A91EA6431900B5D9D0 /* NSString+ZHExtensions.m in Sources */,
 				AC6957AA1EA6431900B5D9D0 /* UINib+ZHExtension.m in Sources */,
+				ACDB7C7E1EB8E895003D6953 /* ZHObjectCache.m in Sources */,
 				ACEAEDC81EA651CD0020925F /* NSFileManager+ZHExtensions.m in Sources */,
 				AC6957AE1EA6431900B5D9D0 /* ZHAddingObject.m in Sources */,
 				ACD903E91EACFB9E0048678C /* ZHModelChange+ZHExtensions.m in Sources */,

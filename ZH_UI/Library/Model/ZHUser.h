@@ -6,15 +6,21 @@
 //  Copyright © 2017 Artem Zhavrotskiy. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "NSString+ZHExtensions.h"
 
-@interface ZHUser : NSObject
+#import "ZHModel.h"
+#import "ZHImageModel.h"
+#import "ZHArrayModel.h"
 
-@property (nonatomic, copy)     NSString *name;
-@property (nonatomic, copy)     NSString *surname;
-@property (nonatomic, copy)     NSString *fullName;
-@property (nonatomic, copy)     UIImage  *image;
+
+
+@interface ZHUser : NSObject <NSCoding>
+
+@property (nonatomic, copy) NSString        *name;
+@property (nonatomic, copy) NSString        *surname;
+@property (nonatomic, copy) NSString        *fullName;
+@property (nonatomic, copy) ZHImageModel    *imageModel;
 
 
 @end

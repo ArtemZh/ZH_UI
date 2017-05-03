@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ZHUser.h"
+#import "ZHImageModel.h"
 
 @interface ZHCell : UITableViewCell
 

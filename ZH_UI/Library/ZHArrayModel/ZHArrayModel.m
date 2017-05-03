@@ -177,13 +177,6 @@
     }
 }
 
-- (id)copyWithZone:(nullable NSZone *)zone {
-    ZHArrayModel *objectCopy = [super copyWithZone:zone];
-    if (objectCopy) {
-        objectCopy.mutableModels = [NSMutableArray arrayWithArray:[self.mutableModels copyWithZone:zone]];
-    }
-    
-    return objectCopy;
-}
+
 
 @end

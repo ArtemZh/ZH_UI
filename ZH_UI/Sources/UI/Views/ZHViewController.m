@@ -19,7 +19,7 @@
 
 NSString *cellIdentifier = @"cellId";
 
-ZHViewControllerBaseViewPropertyWithGetter(ZHViewController, userView, ZHUserView);
+ZHViewControllerBaseViewPropertyWithGetter(ZHViewController, ZHUserView, userView);
 
 @interface ZHViewController ()
 
@@ -35,17 +35,12 @@ ZHViewControllerBaseViewPropertyWithGetter(ZHViewController, userView, ZHUserVie
 }
 
 - (void)viewDidLoad {
-// https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/TableView_iPhone/CreateConfigureTableView/CreateConfigureTableView.html
-    
     [super viewDidLoad];
+    ZHUsers *usersModel = self.usersModel;
     
-    self.usersModel = [self.usersModel usersList];
-    [self.usersModel addObserver:self];
-    NSLog(@"%@", self.usersModel.ZHUsersArray);
-
-    self.userView.tableView.delegate = self;
-    self.userView.tableView.dataSource = self;
-
+    [usersModel addObserver:self];
+    [usersModel load];
+    
     [self.userView.tableView reloadData];
 }
 
@@ -65,7 +60,6 @@ ZHViewControllerBaseViewPropertyWithGetter(ZHViewController, userView, ZHUserVie
     
     [cell setUser:self.usersModel[indexPath.row]];
     
-    NSLog(@"%@", cell.user);
     return cell;
 }
 
@@ -76,11 +70,11 @@ ZHViewControllerBaseViewPropertyWithGetter(ZHViewController, userView, ZHUserVie
 
 - (IBAction)addCell:(id)sender {
     [self.usersModel addUser];
-    NSLog(@"%lu", [self.usersModel.ZHUsersArray count]);
+    [self.userView.tableView reloadData];
 }
 
 - (IBAction)Editing:(id)sender {
-    [self setEditing:!self.userView.editing animated:YES];
+    self.userView.editing = !self.userView.editing;
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -95,7 +89,7 @@ ZHViewControllerBaseViewPropertyWithGetter(ZHViewController, userView, ZHUserVie
 }
 
 
--(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 

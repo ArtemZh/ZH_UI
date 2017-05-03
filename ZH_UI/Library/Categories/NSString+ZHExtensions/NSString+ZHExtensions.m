@@ -88,5 +88,10 @@ static const NSUInteger kZHRandomNameLength = 10;
     return [[self randomStringWithLength:kZHRandomNameLength alphabet:alphabet] capitalizedString];
 }
 
+- (instancetype)stringByAddingPercentEncodingWithAllowedCharactersSet {
+    NSCharacterSet *alphanumericCharacterSet = [NSCharacterSet alphanumericCharacterSet];
+    
+    return [self stringByAddingPercentEncodingWithAllowedCharacters:alphanumericCharacterSet];
+}
 
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ZHObservableObject : NSObject <NSCopying>
+@interface ZHObservableObject : NSObject 
 @property (nonatomic, assign)   NSUInteger  state;
 @property (nonatomic, readonly) NSSet       *observersSet;
 

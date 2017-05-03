@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, ZHModelChangeState) {
 
 @end
 
-@interface ZHArrayModel : ZHModel <NSFastEnumeration, NSCopying>
+@interface ZHArrayModel : ZHModel <NSFastEnumeration>
 @property (nonatomic, readonly) NSArray     *models;
 @property (nonatomic, readonly) NSUInteger  count;
 

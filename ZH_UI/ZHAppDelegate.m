@@ -40,6 +40,7 @@
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    [self saveModel];
 }
 
 
@@ -48,7 +49,11 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    [self saveModel];
 }
 
+- (void)saveModel {
+    [self.controller.usersModel save];
+}
 
 @end

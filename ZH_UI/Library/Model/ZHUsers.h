@@ -10,10 +10,9 @@
 #import "ZHArrayModel.h"
 
 @interface ZHUsers : ZHArrayModel
-@property(nonatomic,strong) NSMutableArray *ZHUsersArray;
 
-- (ZHUsers*) usersList;
+- (NSString *)path;
 - (void) addUser;
-- (void) generateUsers;
+//- (void) generateUsers;
 
 @end

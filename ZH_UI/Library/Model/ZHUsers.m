@@ -8,45 +8,64 @@
 
 #import "ZHUsers.h"
 #import "ZHUser.h"
+#import "NSFileManager+ZHExtensions.h"
+#import "NSObject+ZHExtensions.h"
 
-static ZHUsers* __usersList;
+
+static const NSUInteger kZHUsersCount = 5;
 
 @implementation ZHUsers
 
-- (ZHUsers *) usersList {
-    if (__usersList == nil) {
-        __usersList =  [ZHUsers new];
-        __usersList.ZHUsersArray = [NSMutableArray new];
+- (instancetype) init {
+    self = [super init];
+    if (self == nil) {
+        self =  [ZHUsers new];
     }
     
-    [__usersList generateUsers];
     
-    return __usersList;
+    return self;
 }
 
-- (void) generateUsers {
-    // will be delete
-    int i = 0;
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"ZHUserDefaultImage" ofType:@"png"];
-
-    while (i < 10) {
-        ZHUser *user = [ZHUser new];
-        NSString *userName = [[NSString alloc] initWithFormat:@"test %i", i];
-        [user setName:userName];
-        user.image = [[UIImage alloc] initWithContentsOfFile:path];
-        [self.ZHUsersArray addObject:user];
-        i++;
-    }
-}
+//- (void) generateUsers {
+//        for (NSUInteger i = 0; i < kZHUsersCount; i++) {
+//            [self addModel:[ZHUser new]];
+//        }
+//}
 
 - (void) addUser {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"ZHUserDefaultImage" ofType:@"png"];
-    NSUInteger userCount = [self.ZHUsersArray count];
-    ZHUser *user = [ZHUser new];
-    NSString *userName = [[NSString alloc] initWithFormat:@"test %lu", userCount];
-    [user setName:userName];
-    user.image = [[UIImage alloc] initWithContentsOfFile:path];
-    [self.ZHUsersArray addObject:user];
+    [self addModel:[ZHUser new]];
+}
+
+- (NSString *)path {
+    NSString *fileName = [NSString stringWithFormat:@"%@.plist", NSStringFromClass([self class])];
+    NSURL *appDirectory = [NSFileManager documentDirectoryPath];
+    
+    return [[appDirectory path]stringByAppendingString:fileName];
+}
+
+- (void)save {
+    NSLog(@"%@", self.path);
+    [NSKeyedArchiver archiveRootObject:self.models toFile:self.path];
+}
+
+- (NSArray *)savedUsers {
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:self.path];
+}
+
+- (NSArray *)randomUsers {
+    return [ZHUser objectsWithCount:kZHUsersCount];
+}
+
+
+- (void)performLoading {
+    NSArray *users = self.savedUsers;
+    users = users ?: self.randomUsers;
+    
+    [self performBlockWithoutNotification:^{
+        [self addModels:users];
+    }];
+    
+    self.state = ZHModelDidLoad;
 }
 
 @end

@@ -28,21 +28,12 @@
 - (void)fillWithModel:(ZHUser *)user {
     NSString * text = user.name;
     self.textLabel.text = text;
-    [self.imageView setImage:user.image];
-    [self customizeUserPicture];
+    [self.imageView setImage:user.imageModel];
 }
 
 #pragma mark -
 #pragma mark Private methods
 
-- (void)customizeUserPicture {
-    UIImageView *picture = self.imageView;
-    
-    picture.layer.cornerRadius = picture.frame.size.height /2;
-    picture.layer.masksToBounds = YES;
-    
-    self.imageView.backgroundColor = self.backgroundColor;
-}
 
 
 

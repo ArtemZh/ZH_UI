@@ -17,12 +17,6 @@
         } \
     } while(0) \
 
-#define ZHDispatchBlock(block, ...) \
-    if (block) { \
-        block (__VA_ARGS__); \
-    }
-
-
 
 #define ZHWeakify(variable) \
 __weak __typeof(variable) __ZHWeakified_##variable = variable;
@@ -44,7 +38,7 @@ __strong __typeof(variable) variable = __ZHWeakified_##variable;
 }
 
 
-#define ZHViewControllerBaseViewPropertyWithGetter(viewControllerClass, propertyName, baseViewClass) \
+#define ZHViewControllerBaseViewPropertyWithGetter(viewControllerClass,baseViewClass, propertyName ) \
     @interface viewControllerClass (__ZHPrivatBaseView) \
     ZHDefineBaseViewProrety(propertyName, baseViewClass)\
     \
@@ -94,3 +88,28 @@ __strong __typeof(variable) variable = __ZHWeakified_##variable;
     if (!variable) { \
         return result; \
     }
+
+#define ZHValueBlock(block, variable, ...) \
+    if (block) { \
+    variable = block(__VA_ARGS__); \
+    }
+
+
+#define ZHReturnSharedInstance(variable) \
+    static id sharedInstance = nil; \
+    static dispatch_once_t onceToken; \
+    dispatch_once(&onceToken, ^{ \
+        sharedInstance = variable; \
+    }); \
+    \
+    return sharedInstance;
+
+#define ZHReturnSharedInstanceWithBlock(block) \
+    static id sharedInstance = nil; \
+    static dispatch_once_t onceToken; \
+    dispatch_once(&onceToken, ^{ \
+        ZHValueBlock(block, sharedInstance); \
+    }); \
+    \
+    return sharedInstance;
+

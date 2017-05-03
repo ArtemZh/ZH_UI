@@ -25,4 +25,6 @@
 
 - (NSArray *)symbols;
 
+- (instancetype)stringByAddingPercentEncodingWithAllowedCharactersSet;
+
 @end
