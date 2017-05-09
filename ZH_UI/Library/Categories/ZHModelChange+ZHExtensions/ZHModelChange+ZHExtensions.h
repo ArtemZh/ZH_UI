@@ -10,7 +10,7 @@
 
 @interface ZHArrayChange (ZHExtensions)
 
-- (void)changeTableView:(UITableView *)tableView
+- (void)applyToTableView:(UITableView *)tableView
        withRowAnimation:(UITableViewRowAnimation) animation;
 
 @end

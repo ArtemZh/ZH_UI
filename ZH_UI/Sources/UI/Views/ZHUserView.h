@@ -13,12 +13,12 @@
 
 @interface ZHUserView : UIView
 
-@property(nonatomic,strong) IBOutlet UITableView      *tableView;
-@property(nonatomic,strong) IBOutlet UIButton         *editButton;
-@property (weak, nonatomic) IBOutlet UIButton         *addButton;
-@property(nonatomic, strong) ZHModel                  *model;
+@property (nonatomic,strong)    IBOutlet UITableView    *tableView;
+@property (nonatomic,strong)    IBOutlet UIButton       *editButton;
+@property (weak, nonatomic)     IBOutlet UIButton       *addButton;
+@property (nonatomic, strong)   ZHModel                 *model;
 
-@property(nonatomic,assign, getter=isEditing) BOOL     editing;
+@property (nonatomic,assign, getter=isEditing) BOOL      editing;
 
 - (void)updateUsersViewWithModelChange:(ZHArrayChange *)modelChange;
 

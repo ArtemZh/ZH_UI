@@ -10,7 +10,7 @@
 
 @implementation ZHAddingObject (ZHExtensions)
 
-- (void)changeTableView:(UITableView *)tableView
+- (void)applyToTableView:(UITableView *)tableView
        withRowAnimation:(UITableViewRowAnimation) animation
 {
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.index inSection:0];

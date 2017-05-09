@@ -6,51 +6,52 @@
 //  Copyright © 2016 Artem Zhavrotskiy. All rights reserved.
 //
 
-#define HZEmpty
-
 #define ZHEmpty
+
+#define kZHStringVariableDefinition(variable, value)   static NSString * const variable = value;
+
+#define kZHStringKeyDefinition(key)    kZHStringVariableDefinition(key, @#key)
 
 #define ZHPerformBlock(block, ...) \
     do { \
         if (block) { \
-        block(__VA_ARGS__); \
+            block(__VA_ARGS__); \
         } \
     } while(0) \
 
 
 #define ZHWeakify(variable) \
-__weak __typeof(variable) __ZHWeakified_##variable = variable;
+    __weak __typeof(variable) __ZHWeakified_##variable = variable;
 
 #define ZHStrongify(variable) \
-__strong __typeof(variable) variable = __ZHWeakified_##variable;
+    __strong __typeof(variable) variable = __ZHWeakified_##variable;
 
 
-#define ZHDefineBaseViewProrety(propertyName, viewClass) \
-@property (nonatomic, readonly) viewClass *propertyName;
+#define ZHDefineBaseViewProperty(viewClass, propertyName) \
+    @property (nonatomic, readonly) viewClass     *propertyName;
 
-#define ZHBaseViewGetterSyntesize(selector, viewClass) \
-- (viewClass *)selector { \
+#define ZHBaseViewGetterSynthesize(viewClass, propertyName) \
+    @dynamic propertyName; \
+    \
+- (viewClass *)propertyName { \
     if ([self isViewLoaded] && [self.view isKindOfClass:[viewClass class]]) { \
-    return (viewClass *)self.view; \
+        return (viewClass *)self.view; \
     } \
     \
     return nil; \
 }
 
-
-#define ZHViewControllerBaseViewPropertyWithGetter(viewControllerClass,baseViewClass, propertyName ) \
-    @interface viewControllerClass (__ZHPrivatBaseView) \
-    ZHDefineBaseViewProrety(propertyName, baseViewClass)\
+#define ZHViewControllerBaseViewProperty(viewControllerClass, baseViewClass, propertyName) \
+    @interface viewControllerClass (__ZHPrivateBaseView) \
+    ZHDefineBaseViewProperty(baseViewClass, propertyName); \
     \
     @end \
     \
-    @implementation viewControllerClass (__ZHPrivatBaseView) \
+    @implementation viewControllerClass (__ZHPrivateBaseView) \
     \
-    @dynamic propertyName; \
+    ZHBaseViewGetterSynthesize(baseViewClass, propertyName); \
     \
-    ZHBaseViewGetterSyntesize(propertyName, baseViewClass)\
-    \
-    @end
+    @end \
 
 #define ZHConstant(type, name, value) \
     static const type name = value;
@@ -68,9 +69,9 @@ __strong __typeof(variable) variable = __ZHWeakified_##variable;
         static dispatch_once_t onceToken; \
         static type *variable = nil; \
         dispatch_once(&onceToken, ^{ \
-        if (block) { \
-        variable = block(); \
-        } \
+            if (block) { \
+                variable = block(); \
+                } \
         }); \
         \
         return variable; \
@@ -91,7 +92,7 @@ __strong __typeof(variable) variable = __ZHWeakified_##variable;
 
 #define ZHValueBlock(block, variable, ...) \
     if (block) { \
-    variable = block(__VA_ARGS__); \
+        variable = block(__VA_ARGS__); \
     }
 
 
@@ -112,4 +113,22 @@ __strong __typeof(variable) variable = __ZHWeakified_##variable;
     }); \
     \
     return sharedInstance;
+
+#define ZHExecuteSetterOnce(block) \
+    do { \
+        static id variable = nil; \
+        static dispatch_once_t onceToken; \
+        dispatch_once(&onceToken, ^{ \
+            typeof(block) executeBlock = block; \
+            if (executeBlock) { \
+                variable = executeBlock; \
+            } \
+            ; \
+        }); \
+        \
+        return variable; \
+        \
+    } while(0) \
+
+
 

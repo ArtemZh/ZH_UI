@@ -28,10 +28,7 @@
 #pragma mark -
 #pragma mark saving and restoring of state
 
-- (void)save {
-    
-}
-
+ 
 - (void)load {
     NSUInteger state = self.state;
     @synchronized (self) {
@@ -56,8 +53,8 @@
         case ZHModelDidLoad:
             return @selector(modelDidLoad:);
             
-        case ZHModelFailLoading:
-            return @selector(modelFailLoading:);
+        case ZHModelDidFailLoading:
+            return @selector(modelDidFailLoading:);
             
         case ZHModelWillLoad:
             return @selector(modelWillLoad:);

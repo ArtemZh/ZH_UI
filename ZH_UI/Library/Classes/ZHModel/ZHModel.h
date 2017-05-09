@@ -12,7 +12,7 @@ typedef NS_ENUM(NSUInteger, ZHModelState) {
     ZHModelDidUnload,
     ZHModelWillLoad,
     ZHModelDidLoad,
-    ZHModelFailLoading,
+    ZHModelDidFailLoading,
     ZHCount
 };
 
@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, ZHModelState) {
 
 @optional
 - (void)modelDidLoad:(id)model;
-- (void)modelFailLoading:(id)model;
+- (void)modelDidFailLoading:(id)model;
 
 - (void)modelWillLoad:(id)model;
 - (void)modelDidUnload:(id)model;
@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, ZHModelState) {
 
 @interface ZHModel : ZHObservableObject
 
-- (void)save;
+//- (void)save;
 - (void)load;
 
 //method sould implemented in subclasses

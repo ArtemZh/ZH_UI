@@ -12,7 +12,5 @@
 @interface ZHUsers : ZHArrayModel
 
 - (NSString *)path;
-- (void) addUser;
-//- (void) generateUsers;
 
 @end

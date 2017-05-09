@@ -30,7 +30,7 @@ ZHStringConstantWithValue(kZHDoneButton, Done);
 //        [self.editButton setTitle:editing ? kZHDoneButton : kZHEditingButton forState:UIControlStateNormal];
     }
 }
-
+//rewrite!!!
 - (void)setModel:(id)model {
     if (_model != model) {
         [_model removeObserver:self];
@@ -40,7 +40,7 @@ ZHStringConstantWithValue(kZHDoneButton, Done);
         [_model addObserver:self];
     }
 }
-
+// Method must be call in viewController
 - (void)updateUsersViewWithModelChange:(ZHArrayChange *)modelChange {
     [self.tableView updateTableViewWithModelChange:modelChange];
 }

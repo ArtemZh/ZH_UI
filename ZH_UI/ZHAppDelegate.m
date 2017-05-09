@@ -7,12 +7,14 @@
 //
 
 #import "ZHAppDelegate.h"
-#import "ZHViewController.h"
+
 #import "UIWindow+ZHExtensions.h"
+
+#import "ZHLoginViewController.h"
 
 @interface ZHAppDelegate ()
 
-@property (nonatomic,strong) ZHViewController *controller;
+@property (nonatomic,strong) ZHLoginViewController *controller;
 
 @end
 
@@ -20,15 +22,29 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    UIWindow *window = [UIWindow makeWindow];
+    UIWindow *window = [UIWindow window];
     self.window = window;
     
-    self.controller = [[ZHViewController alloc] initWithNibName:@"ZHUserView" bundle:nil];
-    self.controller.usersModel = [ZHUsers new];
+    self.controller = [[ZHLoginViewController alloc] initWithNibName:@"ZHLoginViewController" bundle:nil];
     window.rootViewController = self.controller;
     
     [window makeKeyAndVisible];
+    
+    
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    
+    BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                  openURL:url
+                                                        sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                                               annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
+                    ];
+    
+    return handled;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -53,7 +69,7 @@
 }
 
 - (void)saveModel {
-    [self.controller.usersModel save];
+
 }
 
 @end

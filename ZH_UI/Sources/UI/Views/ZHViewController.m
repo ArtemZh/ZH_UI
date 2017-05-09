@@ -15,18 +15,16 @@
 #import "UINib+ZHExtension.h"
 #import "UITableView+ZHExtension.h"
 
-
-
+//add category
 NSString *cellIdentifier = @"cellId";
 
-ZHViewControllerBaseViewPropertyWithGetter(ZHViewController, ZHUserView, userView);
+ZHViewControllerBaseViewProperty(ZHViewController, ZHUserView, userView);
 
 @interface ZHViewController ()
 
 @end
 
 @implementation ZHViewController
-
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -37,15 +35,12 @@ ZHViewControllerBaseViewPropertyWithGetter(ZHViewController, ZHUserView, userVie
 - (void)viewDidLoad {
     [super viewDidLoad];
     ZHUsers *usersModel = self.usersModel;
-    
+//statr observ must be rewrite
     [usersModel addObserver:self];
     [usersModel load];
     
     [self.userView.tableView reloadData];
 }
-
-
-
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.usersModel.count;
@@ -58,7 +53,7 @@ ZHViewControllerBaseViewPropertyWithGetter(ZHViewController, ZHUserView, userVie
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZHCell *cell = [tableView reusableCellWithClass:[ZHCell class]];
     
-    [cell setUser:self.usersModel[indexPath.row]];
+    //[cell setUser:self.usersModel[indexPath.row]];
     
     return cell;
 }
@@ -67,36 +62,35 @@ ZHViewControllerBaseViewPropertyWithGetter(ZHViewController, ZHUserView, userVie
 #pragma mark -
 #pragma mark Interface Handling
 
-
-- (IBAction)addCell:(id)sender {
-    [self.usersModel addUser];
-    [self.userView.tableView reloadData];
+- (IBAction)onAdd:(id)sender {
+//    [self.usersModel addUser];
 }
 
-- (IBAction)Editing:(id)sender {
+- (IBAction)editing:(id)sender {
     self.userView.editing = !self.userView.editing;
 }
 
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    ZHUsers *users = self.usersModel;
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [users removeModelAtIndex:indexPath.row];
+-(void)     tableView:(UITableView *)tableView
+   commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+    forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (UITableViewCellEditingStyleDelete == editingStyle) {
+        [self.usersModel removeModelAtIndex:indexPath.row];
     }
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
+           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewCellEditingStyleDelete;
 }
 
-
--(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
--(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
-
 
 #pragma mark
 - (void)model:(ZHUsers *)model didChangeWithModel:(ZHArrayChange *)changeModel {
@@ -107,6 +101,5 @@ ZHViewControllerBaseViewPropertyWithGetter(ZHViewController, ZHUserView, userVie
     NSLog(@"%@", NSStringFromSelector(_cmd));
     [self.userView updateUsersViewWithModelChange:modelChange];
 }
-
 
 @end

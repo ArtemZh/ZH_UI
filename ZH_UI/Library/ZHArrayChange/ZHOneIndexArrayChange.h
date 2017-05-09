@@ -9,8 +9,8 @@
 #import "ZHArrayChange.h"
 
 @interface ZHOneIndexArrayChange : ZHArrayChange
-
 @property (nonatomic, assign)   NSUInteger  index;
+//delete indexPath
 @property (nonatomic, readonly) NSIndexPath *indexPath;
 
 - (instancetype)initWithIndex:(NSUInteger)index object:(id)object;

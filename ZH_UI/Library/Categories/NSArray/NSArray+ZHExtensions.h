@@ -16,5 +16,6 @@ typedef BOOL(^ZHArrayFiltredUsingBlock)(id object);
 
 - (NSArray *)filteredUsingBlock:(ZHArrayFiltredUsingBlock)block;
 - (id)objectWithClass:(Class)cls;
+- (void)performBlockWithEachObject:(void (^)(id object))block;
 
 @end

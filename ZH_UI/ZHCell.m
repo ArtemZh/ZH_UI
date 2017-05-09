@@ -8,33 +8,90 @@
 
 #import "ZHCell.h"
 
+#import "ZHImageModel.h"
+#import "ZHUser.h"
+#import "ZHImageView.h"
+
+#import "ZHGCD.h"
+
+#import "ZHMacros.h"
+
+static NSString * const kZHNoImageName = @"image";
+static NSString * const kZHNoImageExtension = @"jpg";
+
+@interface ZHCell ()
+@property (nonatomic, strong)   ZHImageModel *imageModel;
+
++ (ZHImageModel *)defaultImageModel;
+
+@end
 
 @implementation ZHCell
+
+@dynamic imageModel;
+
+#pragma mark -
+#pragma mark Class Methods
+
++ (ZHImageModel *)defaultImageModel {
+    ZHExecuteSetterOnce(^{
+        NSURL *url = [[NSBundle mainBundle] URLForResource:kZHNoImageName
+                                             withExtension:kZHNoImageExtension];
+        
+        return [ZHImageModel imageWithURL:url];
+    });
+}
 
 #pragma mark -
 #pragma mark Accessors
 
-- (void)setUser:(ZHUser *)user {
-    if (_user != user) {
-        _user = user;
+- (void)setModel:(ZHUser *)user {
+    if (_model != user) {
+        _model = user;
         
-        [self fillWithModel:user];
+        [self fillWithUser:user];
     }
 }
 
-#pragma mark -
-#pragma mark Public Implementations
+- (void)setImageModel:(ZHImageModel *)imageModel {
+    if (self.userImageView.imageModel != imageModel) {
+        [self.userImageView.imageModel removeObserver:self];
+        
+        [imageModel addObserver:self];
+        
+        self.userImageView.imageModel = imageModel;
+    }
+}
 
-- (void)fillWithModel:(ZHUser *)user {
-    NSString * text = user.name;
-    self.textLabel.text = text;
-    [self.imageView setImage:user.imageModel];
+- (ZHImageModel *)imageModel {
+    return self.userImageView.imageModel;
 }
 
 #pragma mark -
-#pragma mark Private methods
+#pragma mark View Lifecycle
 
+- (void)viewDidLoad {
+    self.userImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    self.userImageView.contentImageView.contentMode = UIViewContentModeScaleAspectFit;
+}
 
+#pragma mark -
+#pragma mark Public
 
+- (void)fillWithUser:(ZHUser *)user {
+    self.fullNameLabel.text = user.fullName;
+    
+    self.imageModel = user.imageModel;
+}
+
+#pragma mark -
+#pragma mark ZHModelObserver
+
+- (void)modelDidFailLoading:(ZHModel *)model {
+    ZHPerformAsyncBlockOnBackgroundQueue(^{
+        self.imageModel = [ZHCell defaultImageModel];
+    });
+}
 
 @end

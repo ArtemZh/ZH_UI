@@ -52,7 +52,7 @@
 
 - (NSUInteger)count {
     @synchronized (self) {
-        return [self.mutableModels count];
+        return self.mutableModels.count;
     }
 }
 
@@ -66,7 +66,9 @@
     
     @synchronized (self) {
         [self.mutableModels addObject:model];
-        [self notifyOfArrayChangeWithObject:[ZHArrayChange addingObjectWithIndex:[self indexOfModel:model] object:model]];
+        //unreadable, rewrite
+        [self notifyOfArrayChangeWithObject:[ZHArrayChange addingObjectWithIndex:[self indexOfModel:model]
+                                                                          object:model]];
     }
 }
 
@@ -84,10 +86,8 @@
 
 - (void)addModels:(NSArray *)models {
     @synchronized (self) {
-        if (models) {
-            for (id model in models) {
-                [self addModel:model];
-            }
+        for (id model in models) {
+            [self addModel:model];
         }
     }
 }
@@ -176,7 +176,5 @@
             return [super selectorForState:state];
     }
 }
-
-
 
 @end

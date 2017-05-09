@@ -10,6 +10,6 @@
 
 @interface UIWindow (ZHExtensions)
 
-+ (instancetype)makeWindow;
++ (instancetype)window;
 
 @end

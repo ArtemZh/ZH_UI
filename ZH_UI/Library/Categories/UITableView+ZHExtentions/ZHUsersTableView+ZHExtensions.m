@@ -16,7 +16,7 @@
 
 - (void)updateTableViewWithModelChange:(ZHArrayChange *)modelChange {
     [self updateTableViewWithBlock:^{
-        [modelChange changeTableView:self withRowAnimation:UITableViewRowAnimationAutomatic];
+        [modelChange applyToTableView:self withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
 }
 

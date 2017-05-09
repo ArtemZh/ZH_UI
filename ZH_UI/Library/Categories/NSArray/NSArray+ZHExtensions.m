@@ -46,4 +46,15 @@
     return nil;
 }
 
+- (void)performBlockWithEachObject:(void (^)(id object))block {
+    if (!block) {
+        return;
+    }
+    
+    [self enumerateObjectsUsingBlock:^(id object, NSUInteger idex, BOOL *stop) {
+        block(object);
+    }];
+}
+
+
 @end

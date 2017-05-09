@@ -7,13 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZHUser.h"
-#import "ZHImageModel.h"
+#import "ZHCellModel.h"
+#import "ZHModel.h"
 
-@interface ZHCell : UITableViewCell
+@class ZHUser;
+@class ZHImageView;
+@class ZHImageModel;
 
-@property (nonatomic, strong) ZHUser *user;
+@interface ZHCell : UITableViewCell<ZHCellModel, ZHModelObserver>
+@property (nonatomic, strong)   IBOutlet UILabel        *fullNameLabel;
+@property (nonatomic, strong)   IBOutlet ZHImageView   *userImageView;
+@property (nonatomic, strong)   ZHImageModel           *defaultImageModel;
+@property (nonatomic, strong)   ZHUser                 *model;
 
-
+- (void)fillWithUser:(ZHUser *)user;
 
 @end

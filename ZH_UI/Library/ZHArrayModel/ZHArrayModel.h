@@ -38,7 +38,6 @@ typedef NS_ENUM(NSUInteger, ZHModelChangeState) {
 - (void)removeModelAtIndex:(NSUInteger)index;
 
 - (void)moveModelFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
-
 - (id)objectAtIndexedSubscript:(NSUInteger)index;
 
 @end

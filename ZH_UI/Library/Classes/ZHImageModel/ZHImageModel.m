@@ -66,7 +66,7 @@
     ZHWeakify(self);
     ZHPerformAsyncBlockOnMainQueue(^{
         ZHStrongifyAndReturnIfNil(self);
-        self.state = self.image ? ZHModelDidLoad : ZHModelFailLoading;
+        self.state = self.image ? ZHModelDidLoad : ZHModelDidFailLoading;
     });
 }
 

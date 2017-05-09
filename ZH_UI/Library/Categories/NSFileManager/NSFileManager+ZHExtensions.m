@@ -35,6 +35,15 @@
                                                    inDomains:NSUserDomainMask] lastObject];
 }
 
+//+ (NSString *)documentDirectoryPath {
+//    ZHReturnOnce(NSString, documentDirectory, ^{ return [self pathWithDirectory:NSDocumentDirectory]; });
+//}
+//
+//+ (NSString *)pathWithDirectory:(NSSearchPathDirectory)directory {
+//    return [[self pathsWithDirectory:directory] firstObject];
+//}
+
+
 + (NSURL *)documentDirectoryPath {
     NSURL *directoryPath = [self directoryPathWithType:NSDocumentDirectory];
     

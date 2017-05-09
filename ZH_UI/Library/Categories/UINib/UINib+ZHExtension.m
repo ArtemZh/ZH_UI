@@ -10,7 +10,7 @@
 
 @implementation UINib (Extension)
 
-
+// add pragma mark
 #pragma mark
 
 + (UINib *)nibWithClass:(Class)cls {
@@ -42,6 +42,7 @@
           withOptions:(NSDictionary *)options
 {
     UINib *nib = [self nibWithClass:cls bundle:bundle];
+//add categories for NSArray
     NSArray *objects = [nib instantiateWithOwner:owner
                                          options:options];
     

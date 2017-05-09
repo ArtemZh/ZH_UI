@@ -27,11 +27,10 @@
 #pragma mark Accessors
 
 - (NSURLSession *)downloadSession {
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
-    
-    ZHReturnSharedInstance(session);
+    ZHReturnSharedInstance(^{
+        return [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
+    });
 }
-
 - (void)setDownloadTask:(NSURLSessionDownloadTask *)downloadTask {
     if (_downloadTask != downloadTask) {
         [_downloadTask cancel];
@@ -39,6 +38,10 @@
         [_downloadTask resume];
     }
 }
+//if downloded ok or error
+//- (BOOL)isCached {
+//}
+
 
 #pragma mark -
 #pragma mark Public

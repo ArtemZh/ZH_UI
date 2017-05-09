@@ -7,7 +7,9 @@
 //
 
 #import "ZHUsers.h"
+
 #import "ZHUser.h"
+
 #import "NSFileManager+ZHExtensions.h"
 #import "NSObject+ZHExtensions.h"
 
@@ -16,32 +18,25 @@ static const NSUInteger kZHUsersCount = 5;
 
 @implementation ZHUsers
 
-- (instancetype) init {
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (instancetype)init {
     self = [super init];
-    if (self == nil) {
-        self =  [ZHUsers new];
-    }
     
-    
+    [self subscribeAtAppNotifications:@[UIApplicationWillResignActiveNotification,
+                                        UIApplicationWillTerminateNotification]];
     return self;
 }
-
-//- (void) generateUsers {
-//        for (NSUInteger i = 0; i < kZHUsersCount; i++) {
-//            [self addModel:[ZHUser new]];
-//        }
-//}
-
-- (void) addUser {
-    [self addModel:[ZHUser new]];
-}
-
 - (NSString *)path {
     NSString *fileName = [NSString stringWithFormat:@"%@.plist", NSStringFromClass([self class])];
     NSURL *appDirectory = [NSFileManager documentDirectoryPath];
     
     return [[appDirectory path]stringByAppendingString:fileName];
 }
+
+#pragma mark -
+#pragma mark Private Methods
 
 - (void)save {
     NSLog(@"%@", self.path);
@@ -56,7 +51,6 @@ static const NSUInteger kZHUsersCount = 5;
     return [ZHUser objectsWithCount:kZHUsersCount];
 }
 
-
 - (void)performLoading {
     NSArray *users = self.savedUsers;
     users = users ?: self.randomUsers;
@@ -66,6 +60,17 @@ static const NSUInteger kZHUsersCount = 5;
     }];
     
     self.state = ZHModelDidLoad;
+}
+
+- (void)subscribeAtAppNotifications:(NSArray *)notifications {
+    NSNotificationCenter *noticationCenter = [NSNotificationCenter defaultCenter];
+    
+    for (id notification in notifications) {
+        [noticationCenter addObserver:self
+                             selector:@selector(save)
+                                 name:notification
+                               object:nil];
+    }
 }
 
 @end

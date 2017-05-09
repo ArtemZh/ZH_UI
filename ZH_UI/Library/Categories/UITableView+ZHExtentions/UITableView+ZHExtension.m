@@ -13,8 +13,8 @@
 @implementation UITableView (ZHExtension)
 
 - (id)reusableCellfromNibWithClass:(Class)cls {
-    NSString *identifire = NSStringFromClass(cls);
-    UITableViewCell *cell = [self dequeueReusableCellWithIdentifier:identifire];
+    NSString *identifier = NSStringFromClass(cls);
+    UITableViewCell *cell = [self dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         UINib *nib = [UINib nibWithClass:cls];
         cell = [nib objectWithClass:[cls class]];
@@ -30,7 +30,6 @@
 
 - (id)reusableCellWithClass:(Class)cls {
     id cell = [self dequeueReusableCellWithClass:cls];
-    
     if (!cell) {
         cell = [UINib objectWithClass:cls];
     }
@@ -39,6 +38,10 @@
 }
 
 - (void)updateTableViewWithBlock:(ZHTableViewUpdateBlock)block {
+    if (!block) {
+        return;
+    }
+    
     [self beginUpdates];
     ZHPerformBlock(block);
     [self endUpdates];

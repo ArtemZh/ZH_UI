@@ -101,15 +101,11 @@
 }
 
 - (void)notifyOfState:(NSUInteger)state {
-    @synchronized (self) {
         [self notifyOfState:state withObject:nil];
-    }
 }
 
 - (void)notifyOfState:(NSUInteger)state withObject:(id)object {
-    @synchronized (self) {
         [self notifyOfStateWithSelector:[self selectorForState:state] object:object];
-    }
 }
 
 - (void)performBlockWithNotification:(void (^)(void))block {
@@ -119,6 +115,9 @@
 - (void)performBlockWithoutNotification:(void (^)(void))block {
     [self performBlock:block shouldNotify:NO];
 }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
 
 #pragma mark -
@@ -133,6 +132,7 @@
     @synchronized (self) {
         for (id observer in observers) {
             if ([observer respondsToSelector:selector]) {
+                //add macros
                 [observer performSelector:selector withObject:self withObject:object];
             }
         }
@@ -142,6 +142,11 @@
 - (void)performBlock:(void (^)(void))block
         shouldNotify:(BOOL)shouldNotify
 {
+    if (!block) {
+        return;
+    }
+
+    @synchronized (self) {
     BOOL state = self.shouldNotify;
     
     self.shouldNotify = shouldNotify;
@@ -149,6 +154,7 @@
     ZHPerformBlock(block);
     
     self.shouldNotify = state;
+    }
 }
 
 #pragma mark -

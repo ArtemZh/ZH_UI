@@ -7,50 +7,178 @@
 //
 
 #import "ZHUser.h"
+#import "NSArray+ZHExtensions.h"
+#import "ZHObservableObject.h"
+#import "NSFileManager+ZHExtensions.h"
 
+@interface ZHUser()
+@property (nonatomic, strong)   ZHArrayModel  *friends;
+@property (nonatomic, strong)   NSArray       *friendsIDs;
 
-static NSString * const kZHImageName = @"image";
-static NSString * const kZHImageType = @"jpg";
-static NSString * const kZHCoderName = @"CoderName";
-static NSString * const kZHCoderImageURL = @"CoderNameImageURL";
-static NSString * const kZHImageURL = @"https://lh3.googleusercontent.com/P8xsQbL2TR22Hqobz3xjxA7MIsCJJGEkWwoxNLFGeDT6esrBd0lPSS155UZmQAdA0G-pdcb29WPQZl8=w1439-h778";
+@end
+
+kZHStringVariableDefinition(kZHRootKey, @"archive");
+kZHStringKeyDefinition(kZHUserID);
+kZHStringKeyDefinition(kZHUserFirstNameKey);
+kZHStringKeyDefinition(kZHUserLastNameKey);
+kZHStringKeyDefinition(kZHUserNameKey);
+kZHStringKeyDefinition(kZHUserLocationKey);
+kZHStringKeyDefinition(kZHUserHometownKey);
+kZHStringKeyDefinition(kZHUserImageURLKey);
+kZHStringKeyDefinition(kZHUserBigImageURLKey);
+kZHStringKeyDefinition(kZHUserFriendIDsKey);
 
 @implementation ZHUser
 
 @dynamic imageModel;
 
+#pragma mark -
+#pragma mark Initialization and Deallocation
+
 - (instancetype) init {
     self = [super init];
     if (self) {
-        self.name = [NSString randomName];
+        self.friends = [ZHArrayModel new];
     }
     
     return self;
 }
 
-
-
-- (ZHImageModel *)imageModel {
-    NSURL *url = [NSURL URLWithString:kZHImageURL];
+- (instancetype) initWithID:(NSString *)ID {
+    self = [self init];
+    self.ID = ID;
     
-    return [ZHImageModel imageWithURL:url];
+    return self;
 }
 
+#pragma mark - 
+#pragma mark Class Methods
+
++ (instancetype) userWithID:(NSString *)ID {
+    return [[self alloc] initWithID: ID];
+}
+
++ (instancetype) user {
+    ZHUser *user = [ZHUser new];
+    
+    return user;
+}
+
++ (NSArray *)usersWithCount:(NSUInteger)count {
+    return [NSArray arrayWithObjectsFactoryWithCount:count block:^{ return [ZHUser user];}];
+}
 
 #pragma mark -
-#pragma mark NSCoding
+#pragma mark Accessors
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
-    if (self) {
-        _name = [aDecoder decodeObjectForKey:kZHCoderName];
-    }
-    
-    return self;
+- (NSString *)fullName {
+    return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
 }
 
-- (void) encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:_name forKey:kZHCoderName];
+- (ZHImageModel *)imageModel {
+    ZHImageModel *model = [ZHImageModel imageWithURL:self.imageURL];
+    
+    return model;
+}
+
+- (ZHImageModel *)bigImageModel {
+    ZHImageModel *model = [ZHImageModel imageWithURL:self.bigImageURL];
+    
+    return model;
+}
+
+- (NSArray *)friendIDs {
+    NSMutableArray *friendIDs = [NSMutableArray new];
+    
+    [self.friends.models performBlockWithEachObject:^(ZHUser *user) {
+        [friendIDs addObject:user.ID];
+    }];
+    
+    return [friendIDs copy];
+}
+
+- (void)setFriendIDs:(NSArray *)frinedIDs {
+    [frinedIDs performBlockWithEachObject:^(NSString *ID) {
+        ZHUser *user = [ZHUser userWithID:ID];
+        user.state = ZHModelDidUnload;
+        
+        [self.friends addModel:user];
+    }];
+}
+
+- (NSString *)plistName {
+    return [NSString stringWithFormat:@"%@.plist", self.ID];
+}
+
+- (BOOL)isCacheExists {
+    return [[NSFileManager defaultManager] fileExistsAtPath:self.cachePath];
+}
+
+- (NSString *)cachePath {
+    NSString *cachePath = [[NSString alloc] initWithFormat:@"%@", [NSFileManager cacheDirectoryPath]];
+    return [cachePath stringByAppendingPathComponent:self.plistName];
+}
+
+#pragma mark -
+#pragma mark Public Methods
+
+- (void)save {
+    [NSKeyedArchiver archiveRootObject:[self JSONRepresentation]
+                                toFile:self.cachePath];
+    
+    [self.friends.models performBlockWithEachObject:^(ZHUser *user) {
+        [user save];
+    }];
+    
+}
+
+- (void)load {
+    NSDictionary *archiver = [NSKeyedUnarchiver unarchiveObjectWithFile:self.cachePath][kZHRootKey];
+    
+    if (!archiver) {
+        self.state = ZHModelDidFailLoading;
+        
+        return;
+    }
+    
+#define ZHDecode(key, property) self.property = archiver[key];
+    
+    ZHDecode(kZHUserID, ID)
+    ZHDecode(kZHUserFirstNameKey, firstName)
+    ZHDecode(kZHUserLastNameKey, lastName)
+    ZHDecode(kZHUserNameKey, name)
+    ZHDecode(kZHUserLocationKey, location)
+    ZHDecode(kZHUserHometownKey, hometown)
+    ZHDecode(kZHUserImageURLKey, imageURL)
+    ZHDecode(kZHUserBigImageURLKey, bigImageURL)
+    ZHDecode(kZHUserFriendIDsKey, friendIDs)
+    
+#undef ZHDecode
+    
+    self.state = ZHModelDidLoad;
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (NSDictionary *)JSONRepresentation {
+    NSMutableDictionary *archive = [NSMutableDictionary new];
+    
+#define ZHEncode(key, value) archive[key] = self.value;
+    
+    ZHEncode(kZHUserID, ID)
+    ZHEncode(kZHUserFirstNameKey, firstName)
+    ZHEncode(kZHUserLastNameKey, lastName)
+    ZHEncode(kZHUserNameKey, name)
+    ZHEncode(kZHUserLocationKey, location)
+    ZHEncode(kZHUserHometownKey, hometown)
+    ZHEncode(kZHUserImageURLKey, imageURL)
+    ZHEncode(kZHUserBigImageURLKey, bigImageURL)
+    ZHEncode(kZHUserFriendIDsKey, friendIDs)
+    
+#undef ZHEncode
+    
+    return [NSDictionary dictionaryWithObject:archive forKey:kZHRootKey];
 }
 
 @end

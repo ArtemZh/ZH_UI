@@ -12,11 +12,10 @@
 #import <UIKit/UIKit.h>
 
 @interface ZHViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, ZHModelObserver>
+@property (nonatomic, strong) ZHUsers *usersModel;
 
-@property (nonatomic,strong) ZHUsers *usersModel;
-
-- (IBAction)addCell:(id)sender;
-- (IBAction)Editing:(id)sender;
+- (IBAction)onAdd:(id)sender;
+- (IBAction)editing:(id)sender;
 
 @end
 

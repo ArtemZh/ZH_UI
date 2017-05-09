@@ -10,9 +10,10 @@
 
 @implementation ZHRemovingObject (ZHExtensions)
 
-- (void)changeTableView:(UITableView *)tableView
+- (void)applyToTableView:(UITableView *)tableView
        withRowAnimation:(UITableViewRowAnimation) animation
 {
+    //add method tableView with block
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.index inSection:0];
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:animation];
 }
