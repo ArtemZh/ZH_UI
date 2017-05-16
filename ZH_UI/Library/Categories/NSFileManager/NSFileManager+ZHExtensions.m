@@ -10,68 +10,71 @@
 
 #import "ZHMacros.h"
 
-@implementation NSFileManager (ZHExtensions)
+kZHStringVariableDefinition(appCache, @"appCache")
 
-//+ (NSString *)applicationDataPathWithFolderName:(NSString *)folderName {
-//    NSString *path = [NSString stringWithFormat:@"%@", [self libraryDirectoryPath]];
-//    NSString *dataPath = [path stringByAppendingPathComponent:folderName];
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    
-//    NSError *error = nil;
-//    
-//    if (![fileManager fileExistsAtPath:dataPath]) {
-//        [fileManager createDirectoryAtPath:dataPath
-//               withIntermediateDirectories:YES
-//                                attributes:nil
-//                                     error:&error];
-//        NSLog(@"%@", error);
-//    }
-//    
-//    return dataPath;
-//}
+@implementation NSFileManager (ZHExtensions)
 
 + (NSURL *)directoryPathWithType:(NSSearchPathDirectory)type {
     return [[[NSFileManager defaultManager] URLsForDirectory:type
                                                    inDomains:NSUserDomainMask] lastObject];
 }
 
-//+ (NSString *)documentDirectoryPath {
-//    ZHReturnOnce(NSString, documentDirectory, ^{ return [self pathWithDirectory:NSDocumentDirectory]; });
-//}
-//
-//+ (NSString *)pathWithDirectory:(NSSearchPathDirectory)directory {
-//    return [[self pathsWithDirectory:directory] firstObject];
-//}
-
-
 + (NSURL *)documentDirectoryPath {
-    NSURL *directoryPath = [self directoryPathWithType:NSDocumentDirectory];
-    
-    ZHReturnSharedInstance(directoryPath);
+    ZHReturnSharedInstance(^{return ZHDirectoryPathWithType(NSDocumentDirectory); });
 }
 
 + (NSURL *)libraryDirectoryPath {
-    NSURL *directoryPath = [self directoryPathWithType:NSLibraryDirectory];
-    
-    ZHReturnSharedInstance(directoryPath);
+    ZHReturnSharedInstance(^{return ZHDirectoryPathWithType(NSLibraryDirectory); });
 }
 
 + (NSURL *)applicationDirectoryPath {
-    NSURL *directoryPath = [self directoryPathWithType:NSApplicationDirectory];
-    
-    ZHReturnSharedInstance(directoryPath);
+    ZHReturnSharedInstance(^{return ZHDirectoryPathWithType(NSApplicationDirectory); });
 }
 
 + (NSURL *)cacheDirectoryPath {
-    NSURL *directoryPath = [self directoryPathWithType:NSCachesDirectory];
-    
-    ZHReturnSharedInstance(directoryPath);
+    ZHReturnSharedInstance(^{return ZHDirectoryPathWithType(NSCachesDirectory); });
 }
 
 + (NSArray *)pathsWithDirectory:(NSSearchPathDirectory)directory {
     return NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES);
 }
 
++ (NSURL *)appCacheDirectoryURL {
+    
+    ZHReturnSharedInstance(^{
+        NSURL *libaryDirectoryURL = [NSFileManager libraryDirectoryPath];
+        
+        NSURL *cacheDirectoryURL = [libaryDirectoryURL URLByAppendingPathComponent:appCache];
+        
+        NSFileManager *fileManager = [self defaultManager];
+        
+        [fileManager createDirectoryAtURL:cacheDirectoryURL];
+        
+        return cacheDirectoryURL;
+    });
+}
+
+- (void)createDirectoryAtURL:(NSURL *)url {
+    if (url.isFileURL) {
+        NSString *path = url.path;
+        if (![self fileExistsAtPath:path]) {
+            [self createDirectoryAtPath:path
+            withIntermediateDirectories:YES
+                             attributes:nil
+                                  error:NULL];
+        }
+    }
+}
+
+- (void)copyItemAtURL:(NSURL *)url
+                toURL:(NSURL *)toURL
+{
+    NSError *error = nil;
+    
+    [self createDirectoryAtURL:[toURL URLByDeletingLastPathComponent]];
+    
+    [self copyItemAtURL:url toURL:toURL error:&error];
+}
 
 
 @end

@@ -15,7 +15,7 @@
 @class ZHImageModel;
 
 @interface ZHCell : UITableViewCell<ZHCellModel, ZHModelObserver>
-@property (nonatomic, strong)   IBOutlet UILabel        *fullNameLabel;
+@property (nonatomic, strong)   IBOutlet UILabel       *fullNameLabel;
 @property (nonatomic, strong)   IBOutlet ZHImageView   *userImageView;
 @property (nonatomic, strong)   ZHImageModel           *defaultImageModel;
 @property (nonatomic, strong)   ZHUser                 *model;

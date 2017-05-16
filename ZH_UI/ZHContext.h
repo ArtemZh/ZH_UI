@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ZHModel.h"
 
 @interface ZHContext : NSObject
-@property (nonatomic, readonly) id  model;
+@property (nonatomic, readonly) ZHModel*  model;
 
-+ (instancetype)contextWithModel:(id)model;
-- (instancetype)initWithModel:(id)model;
++ (instancetype)contextWithModel:(ZHModel *)model;
+- (instancetype)initWithModel:(ZHModel *)model;
 
 - (void)execute;
 - (void)cancel;
@@ -21,6 +22,5 @@
 - (void)load;
 - (NSUInteger)contextExecutingState;
 - (NSUInteger)contextDidExecuteState;
-
 
 @end

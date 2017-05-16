@@ -9,6 +9,5 @@
 #import "ZHFileSystemImageModel.h"
 
 @interface ZHURLImageModel : ZHFileSystemImageModel
-@property (nonatomic, readonly, getter=isCached)    BOOL        cached;
 
 @end

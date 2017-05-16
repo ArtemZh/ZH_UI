@@ -35,12 +35,11 @@
 @property (nonatomic, readonly) NSString        *cachePath;
 @property (nonatomic, readonly, getter=isCacheExists) BOOL cacheExists;
 
-+ (instancetype)user;
 + (instancetype)userWithID:(NSString *)ID;
 
 - (instancetype)initWithID:(NSString *)ID;
 
-+ (NSArray *)usersWithCount:(NSUInteger)count;
+- (void) fillWithDictionary:(NSDictionary *)dict;
 
 - (void)save;
 

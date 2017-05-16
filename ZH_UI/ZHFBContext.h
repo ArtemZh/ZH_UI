@@ -10,10 +10,10 @@
 
 @interface ZHFBContext : ZHContext
 @property (nonatomic, readonly) NSString        *graphPath;
+@property (nonatomic, readonly) NSString        *httpMethod;
 @property (nonatomic, readonly) NSDictionary    *requestParameters;
 
 // Methods for override
-- (NSString *)httpMethod;
 
 - (void)fillWithResult:(id)result;
 

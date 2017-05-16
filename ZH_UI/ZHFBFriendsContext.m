@@ -48,11 +48,7 @@
     
     [friendsArray performBlockWithEachObject: ^(NSDictionary *friendInfo){
         ZHUser *user = [ZHUser new];
-        user.ID = friendInfo[kZHID];
-        user.firstName = friendInfo[kZHFirstName];
-        user.lastName = friendInfo[kZHLastName];
-        user.imageURL = [NSURL URLWithString:friendInfo[kZHPicture][kZHData][kZHURL]];
-        user.state = ZHModelDidLoad;
+        [user fillWithDictionary:friendInfo];
         
         [friends performBlockWithoutNotification:^{
             [friends addModel:user];

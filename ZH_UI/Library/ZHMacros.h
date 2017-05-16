@@ -130,5 +130,5 @@
         \
     } while(0) \
 
-
+#define ZHDirectoryPathWithType(type) [self directoryPathWithType:type]
 

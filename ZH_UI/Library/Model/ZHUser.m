@@ -10,6 +10,7 @@
 #import "NSArray+ZHExtensions.h"
 #import "ZHObservableObject.h"
 #import "NSFileManager+ZHExtensions.h"
+#import "ZHFBConstants.h"
 
 @interface ZHUser()
 @property (nonatomic, strong)   ZHArrayModel  *friends;
@@ -55,23 +56,23 @@ kZHStringKeyDefinition(kZHUserFriendIDsKey);
 #pragma mark Class Methods
 
 + (instancetype) userWithID:(NSString *)ID {
-    return [[self alloc] initWithID: ID];
-}
-
-+ (instancetype) user {
-    ZHUser *user = [ZHUser new];
-    
-    return user;
-}
-
-+ (NSArray *)usersWithCount:(NSUInteger)count {
-    return [NSArray arrayWithObjectsFactoryWithCount:count block:^{ return [ZHUser user];}];
+    return [[self alloc] initWithID:ID];
 }
 
 #pragma mark -
 #pragma mark Accessors
 
+- (void) fillWithDictionary:(NSDictionary *)dict {
+    self.ID = dict[kZHID];
+    self.firstName = dict[kZHFirstName];
+    self.lastName = dict[kZHLastName];
+    self.imageURL = [NSURL URLWithString:dict[kZHPicture][kZHData][kZHURL]];
+    self.state = ZHModelDidLoad;
+    
+}
+
 - (NSString *)fullName {
+    
     return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
 }
 
@@ -116,6 +117,7 @@ kZHStringKeyDefinition(kZHUserFriendIDsKey);
 
 - (NSString *)cachePath {
     NSString *cachePath = [[NSString alloc] initWithFormat:@"%@", [NSFileManager cacheDirectoryPath]];
+    
     return [cachePath stringByAppendingPathComponent:self.plistName];
 }
 

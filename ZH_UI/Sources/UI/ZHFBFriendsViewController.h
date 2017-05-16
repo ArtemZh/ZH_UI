@@ -16,7 +16,8 @@
 
 @interface ZHFBFriendsViewController : SUIViewController <
     UITableViewDelegate,
-    UITableViewDataSource>
+    UITableViewDataSource
+>
 
 - (instancetype)initWithUser:(ZHUser *)user;
 

@@ -69,7 +69,7 @@
         [_contentImageView removeFromSuperview];
         
         _contentImageView = contentImageView;
-        
+        _contentImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:contentImageView];
     }
 }

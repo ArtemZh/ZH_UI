@@ -88,9 +88,10 @@
     if (!key) {
         return NO;
     }
-
+    key = [NSString stringWithFormat:@"%@_fix", key];
 #if TARGET_OS_SIMULATOR
     NSLog(@"Falling back to storing access token in NSUserDefaults because of simulator bug");
+    
     [[NSUserDefaults standardUserDefaults] setObject:value forKey:key];
 
     return [[NSUserDefaults standardUserDefaults] synchronize];
@@ -129,6 +130,7 @@
     if (!key) {
         return nil;
     }
+    key = [NSString stringWithFormat:@"%@_fix", key];
 
 #if TARGET_OS_SIMULATOR
     NSLog(@"Falling back to loading access token from NSUserDefaults because of simulator bug");

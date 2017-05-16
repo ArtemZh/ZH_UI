@@ -11,7 +11,7 @@
 #import "ZHGCD.h"
 
 @interface ZHContext ()
-@property (nonatomic, strong)   id  model;
+@property (nonatomic, strong)   ZHModel*  model;
 
 @end
 
@@ -20,14 +20,14 @@
 #pragma mark -
 #pragma mark Class Methods
 
-+ (instancetype)contextWithModel:(id)model {
++ (instancetype)contextWithModel:(ZHModel *)model {
     return [[self alloc] initWithModel:model];
 }
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
-- (instancetype)initWithModel:(id)model {
+- (instancetype)initWithModel:(ZHModel *)model {
     self = [super init];
     self.model = model;
     
@@ -42,8 +42,7 @@
     
     @synchronized(model) {
         NSUInteger state = model.state;
-        if ([self contextDidExecuteState] == state
-            || [self contextExecutingState] == state)
+        if (/*[self contextDidExecuteState] == state ||*/ [self contextExecutingState] == state)
         {
             [model notifyOfState:state];
             
@@ -71,7 +70,7 @@
 }
 
 - (void)load {
-    [(ZHModel *)self.model load];
+    [self.model load];
 }
 
 @end

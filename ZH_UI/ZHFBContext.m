@@ -79,6 +79,7 @@
 }
 
 - (void)fillWithResult:(id)result {
+    
 }
 
 - (void)didFailLoadingFromInternet:(NSError *)error {
@@ -87,14 +88,9 @@
     model.state = ZHModelDidFailLoading;
 }
 
-- (NSString *)httpMethod {
-    return nil;
-}
-
 - (void)cancel {
-    @synchronized(self) {
-        self.connection = nil;
-    }
+    self.connection = nil;
+    
 }
 
 @end

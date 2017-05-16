@@ -9,6 +9,7 @@
 #import "ZHAppDelegate.h"
 
 #import "UIWindow+ZHExtensions.h"
+#import "UIViewController+ZHExtensions.h"
 
 #import "ZHLoginViewController.h"
 
@@ -25,8 +26,10 @@
     UIWindow *window = [UIWindow window];
     self.window = window;
     
-    self.controller = [[ZHLoginViewController alloc] initWithNibName:@"ZHLoginViewController" bundle:nil];
-    window.rootViewController = self.controller;
+    self.controller = [[ZHLoginViewController alloc] initWithNib];
+    UINavigationController *navigationController = [[UINavigationController alloc]
+                                             initWithRootViewController:self.controller];
+    window.rootViewController = navigationController;
     
     [window makeKeyAndVisible];
     
@@ -37,14 +40,13 @@
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-    
-    BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                                  openURL:url
-                                                        sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-                                                               annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
-                    ];
-    
-    return handled;
+
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                                       annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
+            ];
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

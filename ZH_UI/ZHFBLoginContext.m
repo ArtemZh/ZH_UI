@@ -59,9 +59,7 @@
 }
 
 - (NSDictionary *)requestParameters {
-    return @{
-             kZHFields: kZHID
-             };
+    return @{kZHFields: kZHID};
 }
 
 #pragma mark -
@@ -96,9 +94,7 @@
 #pragma mark Private
 
 - (NSArray *)readPermissions {
-    return @[kZHPublicProfile,
-             kZHUserFriends,
-             KZHUserLocation];
+    return @[kZHPublicProfile, kZHUserFriends, KZHUserLocation];
 }
 
 @end

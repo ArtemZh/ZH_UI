@@ -24,8 +24,6 @@ static const NSUInteger kZHUsersCount = 5;
 - (instancetype)init {
     self = [super init];
     
-    [self subscribeAtAppNotifications:@[UIApplicationWillResignActiveNotification,
-                                        UIApplicationWillTerminateNotification]];
     return self;
 }
 - (NSString *)path {
@@ -39,7 +37,6 @@ static const NSUInteger kZHUsersCount = 5;
 #pragma mark Private Methods
 
 - (void)save {
-    NSLog(@"%@", self.path);
     [NSKeyedArchiver archiveRootObject:self.models toFile:self.path];
 }
 
@@ -62,15 +59,11 @@ static const NSUInteger kZHUsersCount = 5;
     self.state = ZHModelDidLoad;
 }
 
-- (void)subscribeAtAppNotifications:(NSArray *)notifications {
-    NSNotificationCenter *noticationCenter = [NSNotificationCenter defaultCenter];
+- (void)subscribeToAppNotifications:(NSArray *)notifications {
+    [self performBlockWithNotification:^{
+        [self save];
+    }];
     
-    for (id notification in notifications) {
-        [noticationCenter addObserver:self
-                             selector:@selector(save)
-                                 name:notification
-                               object:nil];
-    }
 }
 
 @end

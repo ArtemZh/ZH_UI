@@ -11,6 +11,7 @@
 @class ZHUser;
 
 @interface ZHFBLoginContext : ZHGetContext
+
 + (instancetype)loginContextWithUser:(ZHUser *)user
                       viewController:(UIViewController *)viewController;
 

@@ -130,6 +130,7 @@ ZHViewControllerBaseViewProperty(ZHFBFriendsViewController, ZHFBFriendsView, fri
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [self setupNavigationBar];
 }
 

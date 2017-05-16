@@ -54,12 +54,13 @@ static NSString * const kZHNoImageExtension = @"jpg";
 }
 
 - (void)setImageModel:(ZHImageModel *)imageModel {
-    if (self.userImageView.imageModel != imageModel) {
-        [self.userImageView.imageModel removeObserver:self];
+    ZHImageModel *modelOfImage = self.userImageView.imageModel;
+    if (modelOfImage != imageModel) {
+        [modelOfImage removeObserver:self];
         
         [imageModel addObserver:self];
         
-        self.userImageView.imageModel = imageModel;
+        modelOfImage = imageModel;
     }
 }
 
@@ -82,7 +83,7 @@ static NSString * const kZHNoImageExtension = @"jpg";
 - (void)fillWithUser:(ZHUser *)user {
     self.fullNameLabel.text = user.fullName;
     
-    self.imageModel = user.imageModel;
+    self.imageModel = user.imageModel;    
 }
 
 #pragma mark -

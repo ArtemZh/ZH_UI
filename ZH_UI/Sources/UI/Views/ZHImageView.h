@@ -11,8 +11,7 @@
 #import "ZHImageModel.h"
 
 @interface ZHImageView : SUIView
-
-@property (nonatomic, strong)   IBOutlet UIImageView    *contentImageView;
+@property (nonatomic, strong)   IBOutlet UIImageView   *contentImageView;
 @property (nonatomic, strong)   ZHImageModel           *imageModel;
 
 @end

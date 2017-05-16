@@ -69,7 +69,6 @@
     ZHUser *user = [ZHFBUserInteraction userWithID:[ZHUser new]];
     self.model = user;
     if ([ZHFBUserInteraction isUserLoggedIn:user]) {
-        NSLog(@"Friends View controller user ID is %@", user.ID);
         [self showFriendsViewControllerForUser:user];
     }
 }
@@ -78,7 +77,7 @@
 #pragma mark ZHUserStateObserver
 
 - (void)modelDidLoad:(ZHUser *)user {
-    ZHPerformSyncBlockOnMainQueue(^{
+    ZHPerformAsyncBlockOnMainQueue(^{
         [self showFriendsViewControllerForUser:user];
     });
 }

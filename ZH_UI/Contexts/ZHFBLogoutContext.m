@@ -34,8 +34,6 @@
 #pragma mar Public Methods
 
 - (void)load {
-    [super load];
-    
     [[FBSDKLoginManager new] logOut];
 }
 
